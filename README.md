@@ -1,0 +1,3 @@
+# TBezierInterpolation
+Compile:
+  g++ -pipe -std=c++11 -g -ggdb -ggdb3 -O0 -DDEBUG -finline-functions -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Winit-self -Wunreachable-code -Wformat-y2k -Wformat-nonliteral -Wformat-security -Wmissing-include-dirs -Wswitch-default -Wtrigraphs -Wstrict-overflow=5 -Wfloat-equal -Wundef -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Winline -Wsuggest-attribute=const -Wsuggest-attribute=pure -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wmissing-format-attribute -Wlogical-op -o TBezierInterpolation TBezierInterpolation.cpp.4.cpp -lm
