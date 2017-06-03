@@ -63,21 +63,26 @@ bool calculateSpline(const vector<Point2D> &values, vector<Segment> &bezier)
     
     double l1, l2, tmp, x;
     
-    --n;
     
     for (int i = 0; i < n; ++i)
     {
         bezier[i].points[0] = bezier[i].points[1] = values[i];
         bezier[i].points[2] = bezier[i].points[3] = values[i + 1];
         
-        cur = next;
-        next = values[i + 2] - values[i + 1];
-        next.normalize();
-        
         tgL = tgR;
-        
-        tgR = cur + next;
-        tgR.normalize();
+        cur = next;
+
+        if(i+1 < n){
+            next = values[i + 2] - values[i + 1];
+            next.normalize();
+
+            tgR = cur + next;
+            tgR.normalize();
+        }else{
+            tgR.x= 0.0;
+            tgR.y= 0.0;
+        }
+
         
         if (abs(values[i + 1].y - values[i].y) < EPSILON)
         {
@@ -119,12 +124,6 @@ bool calculateSpline(const vector<Point2D> &values, vector<Segment> &bezier)
         bezier[i].points[1] += tgL * l1;
         bezier[i].points[2] -= tgR * l2;
     }
-    
-    l1 = abs(tgL.x) > EPSILON ? (values[n + 1].x - values[n].x) / (2.0 * tgL.x) : 1.0;
-    
-    bezier[n].points[0] = bezier[n].points[1] = values[n];
-    bezier[n].points[2] = bezier[n].points[3] = values[n + 1];
-    bezier[n].points[1] += tgR * l1;
     
     return true;
 }
